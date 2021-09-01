@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from './components/ThemeProvider/ThemeProvider';
 import './App.css';
 import Container from './components/Container/Container';
-import Search from './components/Search/Search'
-import User from './components/User/User'
+import Header from './components/Header/Header';
+import Search from './components/Search/Search';
+import User from './components/User/User';
 
 
 
 function App() {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
+  console.log('darkmode:', darkMode);
   const [searchTerm, setSearchTerm] = useState('octocat');
   const [user, setUser] = useState('');
+  const [isEmptySearch, setIsEmptySearch] = useState(false);
 
   const handleSearch = () => {
     const searchField = document.getElementById('search');
@@ -22,8 +28,16 @@ function App() {
       .then(res => res.json())
       .then(
         (result) => {
-          setUser(result);
+          if (result.name) {
+            setUser(result);
+            setIsEmptySearch(false);
+          } else {
+            setIsEmptySearch(true);
+          }
         })
+      .catch(error => {
+        throw(error)
+      })
   }, [searchTerm])
 
   
@@ -31,8 +45,9 @@ function App() {
   return (
     <div className="App">
       <Container>
-        <Search searchTerm={searchTerm} handleSearch={handleSearch}/>
-        <User user={user} />
+        <Header />
+        <Search searchTerm={searchTerm} handleSearch={handleSearch} isEmptySearch={isEmptySearch} />
+        { isEmptySearch ? '' : <User user={user} /> }
       </Container>
     </div>
   );

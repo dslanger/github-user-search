@@ -10,11 +10,12 @@ const Search = (props) => {
       props.handleSearch();
     }
   }
-
+  console.log('isEmptySearch:', props.isEmptySearch);
   return (
-    <div className="bg-white p-4 m-12 flex items-center">
+    <div className="bg-white mb-12 flex items-center relative">
       <FontAwesomeIcon icon={faSearch} />
       <input id="search" className="w-full rounded p-2 border-white" name="searchTerm" type="text" onKeyDown={handleKeyDown} onBlur={props.handleSearch} placeholder="Enter a GitHub username" />
+      {props.isEmptySearch ? <span className="absolute right-24 inline-block w-24 border-2 mr-6 bg-blue-500 text-white">No Results</span> : ''}
       <button className="bg-red-400 hover:bg-red-300 rounded text-white p-2 pl-4 pr-4" onClick={props.handleSearch}>
               Search
       </button>
