@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Container from './components/Container/Container';
+import Search from './components/Search/Search'
+import User from './components/User/User'
+
+
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('octocat');
+  const [user, setUser] = useState('');
+
+  const handleSearch = () => {
+    const searchField = document.getElementById('search');
+    setSearchTerm(searchField.value);
+  };
+
+  
+
+  useEffect(() => {
+    fetch(`https://api.github.com/users/${searchTerm}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setUser(result);
+        })
+  }, [searchTerm])
+
+  
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Search searchTerm={searchTerm} handleSearch={handleSearch}/>
+        <User user={user} />
+      </Container>
     </div>
   );
 }
