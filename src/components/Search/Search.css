@@ -1,1 +1,6 @@
-.Search {}
+.Search {
+}
+
+#search:-webkit-autofill {
+	background-color: transparent !important;
+}

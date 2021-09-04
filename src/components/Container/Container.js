@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Container.css';
 
 const Container = (props) => (
-  <div className="container mx-auto max-w-6xl" data-testid="Container">
+  <div className="container mx-auto max-w-4xl" data-testid="Container">
     {props.children}
   </div>
 );

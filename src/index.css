@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	h1 {
+		@apply text-2xl font-bold leading-normal;
+	}
+	h2 {
+		@apply text-xl font-bold leading-normal;
+	}
+	h3 {
+		@apply text-lg leading-snug;
+	}
+	h4 {
+		@apply text-sm leading-normal;
+	}
+	p {
+		@apply text-base leading-relaxed;
+	}
+}

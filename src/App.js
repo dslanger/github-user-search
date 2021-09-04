@@ -11,8 +11,7 @@ import User from './components/User/User';
 function App() {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
-  console.log('darkmode:', darkMode);
-  const [searchTerm, setSearchTerm] = useState('octocat');
+  const [searchTerm, setSearchTerm] = useState('');
   const [user, setUser] = useState('');
   const [isEmptySearch, setIsEmptySearch] = useState(false);
 
@@ -43,11 +42,11 @@ function App() {
   
   
   return (
-    <div className="App">
+    <div className={`App font-mono px-12 py-24 h-screen ${darkMode ? "bg-lightBlack" : "bg-lightGray"}`}>
       <Container>
         <Header />
         <Search searchTerm={searchTerm} handleSearch={handleSearch} isEmptySearch={isEmptySearch} />
-        { isEmptySearch ? '' : <User user={user} /> }
+        { isEmptySearch || searchTerm === '' ? '' : <User user={user} /> }
       </Container>
     </div>
   );
