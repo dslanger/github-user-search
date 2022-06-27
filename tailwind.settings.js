@@ -19,6 +19,6 @@ module.exports = {
       '2xl': 96,
     },
     grid: {
-      cols: 12,
+      cols: 24,
     },
   }
